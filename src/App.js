@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Link  } from 'react-router-dom'
+import Main from './Main'
 
-
-
-function handleClick()  {
+{/* function handleClick(e)  {
+   e.preventDefault();
   console.log('this is:', this);
 }
+*/}
+
+
+const QuizLink = () => (
+<Link to='/quiz'>Quiz</Link>
+)
 
 class App extends Component {
   render() {
@@ -19,13 +26,14 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <button onClick={handleClick}>
-            Click here
-        </button>
+        <QuizLink/>
+      {/* QuizLink: Länkar vidare till vår Quizkomponent /Sabina & Karolin */}
+        <Main/>
       </div>
     );
   }
 }
+
 
 
 
