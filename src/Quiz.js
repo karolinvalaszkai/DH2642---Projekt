@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Quiz = () => (
-<div> Heeej! </div>
+<div> Dags att starta quizet! </div>
 
 )
 
