@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-const Quiz = () => (
-<div> Dags att starta quizet! </div>
+import { GoogleApiWrapper } from 'google-maps-react' 
+import MapContainer from './MapContainer'
 
-)
 
-export default Quiz
+
+
+
+class Quiz extends Component {
+  render() {
+    return (
+      <div>
+        <MapContainer google={this.props.google} onClick={console.log("Map clicked")} onDragend={console.log("Drag end")}/>
+      </div>
+    );
+  }
+}
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyBgN8zc0SMhlbDtZBMj0Byk7i6ORGvP9uE&',
+})(Quiz)
