@@ -12,7 +12,7 @@ import Main from './Main'
 
 
 const QuizLink = () => (
-<Link to='/quiz'>Quiz</Link>
+<Link to='/quiz'>Load Quiz Map</Link>
 )
 
 class App extends Component {
