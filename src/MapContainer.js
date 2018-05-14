@@ -37,6 +37,22 @@ export default class MapContainer extends Component {
     }
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+
+
+
   render() {
     const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
       width: '90vw', // 90vw basically means take up 90% of the width screen. px also works.
@@ -44,8 +60,13 @@ export default class MapContainer extends Component {
     }
 
     return ( // in our return function you must return a div with ref='map' and style.
+      <div>
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
       <div ref="map" style={style}>
         loading map...
+      </div>
       </div>
     )
   }
