@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import * as Ons from 'react-onsenui';
+//import * as Ons from 'react-onsenui';
 
 export default class MapContainer extends Component {
 
