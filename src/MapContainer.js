@@ -17,28 +17,42 @@ export default class MapContainer extends Component {
 
 
   componentDidUpdate() {
-    console.log('zoomRate',this)
-    var zoomRate = 20 
-    if (this.state.isToggleOn == true){
+    var zoomRate = 20;
+    console.log("componentDidUpdate",this.countryNumber)
+    if (this.countryNumber === undefined){
+      this.countryNumber = 0;
+    }
+
+    if (this.countryNumber === 9){
+      console.log("KLAAAART")
+    }
+
+    if (this.state.isToggleOn === true){
       zoomRate = 20
     };
-    if (this.state.isToggleOn == false){
+    if (this.state.isToggleOn === false){
       zoomRate = 2
+      this.countryNumber = this.countryNumber + 1;
     };
-
-    this.loadMap(zoomRate); // call loadMap function to load the google map
+    this.loadMap(zoomRate,this.countryNumber); // call loadMap function to load the google map
 
 
   }
 
-  loadMap(zoomRate) {
-    console.log(zoomRate)
+  loadMap(zoomRate,countryNumber) {
+    console.log("zoomRate:",zoomRate);
+    console.log("countryNumber:",countryNumber);
 
-    var sweden = {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}};
+
+    var countries = [
+                    {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
+                    {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
+
+
+                    ];
     if (this.props && this.props.google) { // checks to make sure that props have been passed
-          function zoom(map, _zoom) {
-        map.setZoom(_zoom);
-      }
+ 
       const {google} = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
 
@@ -46,12 +60,23 @@ export default class MapContainer extends Component {
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const mapConfig = Object.assign({}, {
-        center: sweden.coordinates, // sets center of google map to NYC.
+        center: countries[countryNumber].coordinates, // sets center of google map to NYC.
         //zoom: this.zoomRate, // sets zoom. Lower numbers are zoomed further out.
       // zoom: function zoom(map, _zoom) {
       //     map.setZoom(_zoom);
       //   },
       zoom: zoomRate,
+
+      //Disable all google maps functions
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+
+
 
         mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
       })
@@ -76,21 +101,24 @@ export default class MapContainer extends Component {
 
     }));
   }
-zoomIn() {
-    var zoomRate = 20;
-    this.componentDidUpdate();
+// zoomIn() {
+//     var zoomRate = 20;
+//     this.componentDidUpdate();
 
-  }
-zoomOut() {
-    var zoomRate = 2;
-    this.componentDidUpdate();
-  }
+//   }
+// zoomOut() {
+//     var zoomRate = 2;
+//     this.componentDidUpdate();
+//   }
 
 showHideAnswer() {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
 
+    
     }));
+    
+  
   }
 
 
