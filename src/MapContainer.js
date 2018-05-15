@@ -17,8 +17,9 @@ export default class MapContainer extends Component {
 
 
   componentDidUpdate() {
-    var zoomRate = 20;
+    var zoomRate = 18;
     console.log("componentDidUpdate",this.countryNumber)
+    
     if (this.countryNumber === undefined){
       this.countryNumber = 0;
     }
@@ -28,11 +29,12 @@ export default class MapContainer extends Component {
     }
 
     if (this.state.isToggleOn === true){
-      zoomRate = 20
+      zoomRate = 18;
+      this.countryNumber = this.countryNumber + 1;
     };
     if (this.state.isToggleOn === false){
-      zoomRate = 2
-      this.countryNumber = this.countryNumber + 1;
+      zoomRate = 3
+      
     };
     this.loadMap(zoomRate,this.countryNumber); // call loadMap function to load the google map
 
@@ -60,7 +62,7 @@ export default class MapContainer extends Component {
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const mapConfig = Object.assign({}, {
-        center: countries[countryNumber].coordinates, // sets center of google map to NYC.
+        center: countries[countryNumber-1].coordinates, // sets center of google map to NYC.
         //zoom: this.zoomRate, // sets zoom. Lower numbers are zoomed further out.
       // zoom: function zoom(map, _zoom) {
       //     map.setZoom(_zoom);
