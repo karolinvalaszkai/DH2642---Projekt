@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import * as Ons from 'react-onsenui';
 
 export default class MapContainer extends Component {
 
@@ -12,14 +13,32 @@ export default class MapContainer extends Component {
       { name: "Bronx Supreme Court", location: {lat: 40.8262388, lng: -73.9235238} }
     ]
   }
+  
+
 
   componentDidUpdate() {
-    this.loadMap(); // call loadMap function to load the google map
+    console.log('zoomRate',this)
+    var zoomRate = 20 
+    if (this.state.isToggleOn == true){
+      zoomRate = 20
+    };
+    if (this.state.isToggleOn == false){
+      zoomRate = 2
+    };
+
+    this.loadMap(zoomRate); // call loadMap function to load the google map
+
+
   }
 
-  loadMap() {
+  loadMap(zoomRate) {
+    console.log(zoomRate)
+
     var sweden = {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}};
     if (this.props && this.props.google) { // checks to make sure that props have been passed
+          function zoom(map, _zoom) {
+        map.setZoom(_zoom);
+      }
       const {google} = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
 
@@ -28,7 +47,12 @@ export default class MapContainer extends Component {
 
       const mapConfig = Object.assign({}, {
         center: sweden.coordinates, // sets center of google map to NYC.
-        zoom: 11, // sets zoom. Lower numbers are zoomed further out.
+        //zoom: this.zoomRate, // sets zoom. Lower numbers are zoomed further out.
+      // zoom: function zoom(map, _zoom) {
+      //     map.setZoom(_zoom);
+      //   },
+      zoom: zoomRate,
+
         mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
       })
 
@@ -43,11 +67,29 @@ export default class MapContainer extends Component {
 
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
+    this.showHideAnswer = this.showHideAnswer.bind(this);
   }
 
   handleClick() {
     this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
+
+    }));
+  }
+zoomIn() {
+    var zoomRate = 20;
+    this.componentDidUpdate();
+
+  }
+zoomOut() {
+    var zoomRate = 2;
+    this.componentDidUpdate();
+  }
+
+showHideAnswer() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+
     }));
   }
 
@@ -61,9 +103,28 @@ export default class MapContainer extends Component {
 
     return ( // in our return function you must return a div with ref='map' and style.
       <div>
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
+
+      <button onClick={this.showHideAnswer}>
+         {this.state.isToggleOn ? 'Show answer' : 'Hide answer'}
       </button>
+      
+      {/*
+      <button onClick={this.handleClick}>
+         {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+
+      <button onClick={this.zoomOut}>
+      Show answer
+      </button>
+
+      <button onClick={this.zoomIn}>
+      Next
+      </button>
+
+      // <Ons.Page>
+      //   <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+      // </Ons.Page>
+      */}
       <div ref="map" style={style}>
         loading map...
       </div>
