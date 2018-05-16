@@ -24,7 +24,7 @@ export default class MapContainer extends Component {
       this.countryNumber = 0;
     }
 
-    if (this.countryNumber === 9){
+    if (this.countryNumber === 10){
       console.log("KLAAAART")
     }
 
@@ -49,10 +49,16 @@ export default class MapContainer extends Component {
     var countries = [
                     {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
                     {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                    {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                     {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
-
-
                     ];
+
     if (this.props && this.props.google) { // checks to make sure that props have been passed
  
       const {google} = this.props; // sets props equal to google
