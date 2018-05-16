@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link  } from 'react-router-dom'
 
 const Home = () => (
-<div> Homepage </div>
+<div> <Link to='/login'>Login</Link> </div>
 
 )
 
