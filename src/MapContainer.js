@@ -17,8 +17,23 @@ export default class MapContainer extends Component {
 
 
   componentDidUpdate() {
-    var zoomRate = 18;
+    this. zoomRate = 18;
+
+    this.countries = [
+                {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
+                {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
+                ];
+                
     console.log("componentDidUpdate",this.countryNumber)
+    console.log("componentDidUpdate countries",this.countries)
     
     if (this.countryNumber === undefined){
       this.countryNumber = 0;
@@ -29,35 +44,34 @@ export default class MapContainer extends Component {
     }
 
     if (this.state.isToggleOn === true){
-      zoomRate = 18;
+      this.zoomRate = 18;
       this.countryNumber = this.countryNumber + 1;
     };
     if (this.state.isToggleOn === false){
-      zoomRate = 3
+      this.zoomRate = 3
       
     };
-    this.loadMap(zoomRate,this.countryNumber); // call loadMap function to load the google map
+    this.loadMap(); // call loadMap function to load the google map
 
 
   }
 
-  loadMap(zoomRate,countryNumber) {
-    console.log("zoomRate:",zoomRate);
-    console.log("countryNumber:",countryNumber);
+  loadMap() {
 
 
-    var countries = [
-                    {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
-                    {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                    {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
-                    ];
+
+    // var countries = [
+    //                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
+    //                 {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
+    //                 ];
 
     if (this.props && this.props.google) { // checks to make sure that props have been passed
  
@@ -68,12 +82,12 @@ export default class MapContainer extends Component {
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const mapConfig = Object.assign({}, {
-        center: countries[countryNumber-1].coordinates, // sets center of google map to NYC.
+        center: this.countries[this.countryNumber-1].coordinates, // sets center of google map to NYC.
         //zoom: this.zoomRate, // sets zoom. Lower numbers are zoomed further out.
       // zoom: function zoom(map, _zoom) {
       //     map.setZoom(_zoom);
       //   },
-      zoom: zoomRate,
+      zoom: this.zoomRate,
 
       //Disable all google maps functions
       streetViewControl: false,
@@ -143,7 +157,7 @@ showHideAnswer() {
       <button onClick={this.showHideAnswer}>
          {this.state.isToggleOn ? 'Show answer' : 'Hide answer'}
       </button>
-      
+
       {/*
       <button onClick={this.handleClick}>
          {this.state.isToggleOn ? 'ON' : 'OFF'}
