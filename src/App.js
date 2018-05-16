@@ -11,8 +11,8 @@ import Main from './Main'
 */}
 
 
-const QuizLink = () => (
-<Link to='/quiz'>Load Quiz Map</Link>
+const LoginLink = () => (
+<Link to='/login'>Login</Link>
 )
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <QuizLink/>
+        <LoginLink/>
       {/* QuizLink: Länkar vidare till vår Quizkomponent /Sabina & Karolin */}
         <Main/>
       </div>

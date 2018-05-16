@@ -6,7 +6,7 @@ import MapContainer from './MapContainer'
 
 
 
-class Quiz extends Component {
+class Login extends Component {
   render() {
     return (
       <div>
