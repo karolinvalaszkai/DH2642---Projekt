@@ -104,6 +104,12 @@ export default class MapContainer extends Component {
       })
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+      const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+          position: this.countries[this.countryNumber-1].coordinates, // sets position of marker to specified location
+          map: this.map, // sets markers to appear on the map we just created on line 35
+          title: "Where is this?", // the title of the marker is set to the name of the location
+          icon: {url:'https://upload.wikimedia.org/wikipedia/commons/f/f6/Lol_question_mark.png',scaledSize: new google.maps.Size(30, 30)},
+        });
 
     }
   }
@@ -116,6 +122,7 @@ export default class MapContainer extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.showHideAnswer = this.showHideAnswer.bind(this);
   }
+
 
   handleClick() {
     this.setState(prevState => ({
