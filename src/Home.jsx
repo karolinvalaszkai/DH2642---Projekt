@@ -13,8 +13,8 @@ class Home extends Component {
   // Configure FirebaseUI.
   uiConfig = {
     // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+
     callbacks: {
       // Avoid redirects after sign-in.
       signInSuccessWithAuthResult: () => false
