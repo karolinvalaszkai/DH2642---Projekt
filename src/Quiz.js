@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 
 import { GoogleApiWrapper } from 'google-maps-react'
 import MapContainer from './MapContainer'
-
-
+import QuizContainer from './QuizContainer'
 
 
 
@@ -13,7 +12,9 @@ class Quiz extends Component {
       <div>
         <MapContainer google={this.props.google} onClick={console.log("Map clicked")} onDragend={console.log("Drag end")}/>
       </div>
-
+      <div>
+        <QuizContainer/>
+      </div>
     );
   }
 }
