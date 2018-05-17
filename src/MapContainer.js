@@ -124,12 +124,82 @@ export default class MapContainer extends Component {
       {
         question: "What country does this look like?",
         answers: {
-          a: "Antarctica",
-          b: "Exploring the Pacific Ocean",
-          c: "Sitting in a tree",
-          d: "Minding his own business, so stop asking"
+          a: "Spain",
+          b: "Canada",
+          c: "U.S.A.",
+          d: "Norway"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Greece",
+          b: "Cyprus",
+          c: "Italy",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "Bali",
+          c: "Japan",
+          d: "Thailand"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
         },
         correctAnswer: "d"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Vatican City State",
+          c: "Moldavia",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Australia",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Peru",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "China",
+          c: "Egypt",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
       }
     ];
 
@@ -141,21 +211,12 @@ export default class MapContainer extends Component {
                 {country: "Sweden", coordinates: {lat: 59.3470962, lng: 18.0724084}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
-<<<<<<< HEAD
-                {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
-=======
                 {country: "India", coordinates: {lat: 27.174000, lng: 78.042100}},
                 {country: "China", coordinates: {lat: 39.916667, lng: 116.396973}},
                 {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
                 {country: "Australia", coordinates: {lat: -33.857197, lng: 151.21514}},
                 {country: "Peru", coordinates: {lat: -13.163056, lng: -72.545556}},
                 {country: "Egypt", coordinates: {lat: 29.979175, lng: 31.134358}}
->>>>>>> 7e01021ee44632002e1104ac39436691dda532a2
                 ];
 
     console.log("componentDidUpdate",this.countryNumber)
@@ -222,6 +283,7 @@ export default class MapContainer extends Component {
       zoomControl: false,
       rotateControl: false,
       fullscreenControl: false,
+      gestureHandling: false,
 
 
 
