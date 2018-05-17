@@ -14,6 +14,197 @@ export default class MapContainer extends Component {
     ]
   }
 
+<<<<<<< HEAD
+=======
+// Quiz
+    const quizContainer = document.getElementById('quiz');
+    const resultsContainer = document.getElementById('results');
+    const submitButton = document.getElementById('submit');
+
+    function buildQuiz(){
+
+      // we'll need a place to store the HTML output
+      const output = [];
+
+      // for each question...
+      myQuestions.forEach(
+        (currentQuestion, questionNumber) => {
+
+          // we'll want to store the list of answer choices
+          const answers = [];
+
+          // and for each available answer...
+          for(letter in currentQuestion.answers){
+
+            // ...add an HTML radio button
+            answers.push(
+              `<label>
+                <input type="radio" name="question${questionNumber}" value="${letter}">
+                ${letter} :
+                ${currentQuestion.answers[letter]}
+              </label>`
+            );
+          }
+
+          // add this question and its answers to the output
+          output.push(
+            `<div class="question"> ${currentQuestion.question} </div>
+            <div class="answers"> ${answers.join('')} </div>`
+          );
+        }
+      );
+
+      // finally combine our output list into one string of HTML and put it on the page
+      quizContainer.innerHTML = output.join('');
+
+      }
+
+    function showResults(){
+      // gather answer containers from our quiz
+      const answerContainers = quizContainer.querySelectorAll('.answers');
+
+      // keep track of user's answers
+      let numCorrect = 0;
+
+      // for each question...
+      myQuestions.forEach( (currentQuestion, questionNumber) => {
+
+        // find selected answer
+        const answerContainer = answerContainers[questionNumber];
+        const selector = 'input[name=question'+questionNumber+']:checked';
+        const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+        // if answer is correct
+        if(userAnswer===currentQuestion.correctAnswer){
+          // add to the number of correct answers
+          numCorrect++;
+
+          // color the answers green
+          answerContainers[questionNumber].style.color = 'lightgreen';
+        }
+        // if answer is wrong or blank
+        else{
+          // color the answers red
+          answerContainers[questionNumber].style.color = 'red';
+        }
+      });
+
+      // show number of correct answers out of total
+      resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
+
+    }
+
+    // display quiz right away
+    buildQuiz();
+
+    // on submit, show results
+    submitButton.addEventListener('click', showResults);
+
+
+    const myQuestions = [
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Sweden",
+          b: "USA",
+          c: "France"
+          d: "Italy"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Italy",
+          b: "Sweden",
+          c: "USA"
+          d: "China"
+
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Spain",
+          b: "Canada",
+          c: "U.S.A.",
+          d: "Norway"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Greece",
+          b: "Cyprus",
+          c: "Italy",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "Bali",
+          c: "Japan",
+          d: "Thailand"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "d"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Vatican City State",
+          c: "Moldavia",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Australia",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Peru",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "China",
+          c: "Egypt",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
+      }
+    ];
+>>>>>>> a8b00f2548945c75c122c878cbe772ce2e028c6d
 
   componentDidUpdate() {
     this. zoomRate = 17;
@@ -23,6 +214,7 @@ export default class MapContainer extends Component {
                 {country: "Sweden", coordinates: {lat: 59.3470962, lng: 18.0724084}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
+<<<<<<< HEAD
 
                 {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
@@ -31,13 +223,18 @@ export default class MapContainer extends Component {
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
 
+=======
+>>>>>>> a8b00f2548945c75c122c878cbe772ce2e028c6d
                 {country: "India", coordinates: {lat: 27.174000, lng: 78.042100}},
                 {country: "China", coordinates: {lat: 39.916667, lng: 116.396973}},
                 {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
                 {country: "Australia", coordinates: {lat: -33.857197, lng: 151.21514}},
                 {country: "Peru", coordinates: {lat: -13.163056, lng: -72.545556}},
                 {country: "Egypt", coordinates: {lat: 29.979175, lng: 31.134358}}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a8b00f2548945c75c122c878cbe772ce2e028c6d
                 ];
 
     console.log("componentDidUpdate", this.countryNumber)
@@ -98,6 +295,7 @@ export default class MapContainer extends Component {
         //   },
         zoom: this.zoomRate,
 
+<<<<<<< HEAD
         //Disable all google maps functions
         streetViewControl: false,
         scaleControl: false,
@@ -106,6 +304,17 @@ export default class MapContainer extends Component {
         zoomControl: false,
         rotateControl: false,
         fullscreenControl: false,
+=======
+      //Disable all google maps functions
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      //gestureHandling: false,
+>>>>>>> a8b00f2548945c75c122c878cbe772ce2e028c6d
 
 
 
