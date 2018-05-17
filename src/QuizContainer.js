@@ -5,10 +5,10 @@ import MapContainer from './MapContainer'
 
 export default class QuizContainer extends Component {
 
-  // Quiz
-  const quizContainer = document.getElementById('quiz');
-  const resultsContainer = document.getElementById('results');
-  const submitButton = document.getElementById('submit');
+
+  const quizContainer = this.refs.quiz;
+  const resultsContainer = this.refs.results;
+  const submitButton = this.refs.submit;
 
   function buildQuiz() {
 
@@ -79,8 +79,7 @@ export default class QuizContainer extends Component {
     });
 
     // show number of correct answers out of total
-    resultsContainer.innerHTML = numCorrect + ' out of ' + myQuestions.length;
-
+resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
   // display quiz right away
@@ -122,5 +121,17 @@ export default class QuizContainer extends Component {
       correctAnswer: "d"
     }
   ];
+
+}
+
+render(){
+
+  return(
+    <div>
+      <div ref="quiz"></div>
+      <button ref="submit">Submit Quiz</button>
+      <div ref="results"></div>
+    </div>
+  )
 
 }

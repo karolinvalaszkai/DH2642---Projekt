@@ -10,7 +10,7 @@ class Quiz extends Component {
   render() {
     return (
       <div>
-        <MapContainer google={this.props.google} onClick={console.log("Map clicked")} onDragend={console.log("Drag end")}/>
+        <MapContainer google={this.props.google} />
         <QuizContainer/>
       </div>
     );

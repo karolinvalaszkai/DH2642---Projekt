@@ -166,11 +166,9 @@ export default class MapContainer extends Component {
     }
 
     return ( // in our return function you must return a div with ref='map' and style.
-      <
-      div >
+      <div>
 
-      <
-      button onClick = {
+      <button onClick = {
         this.showHideAnswer
       } > {
         this.state.isToggleOn ? 'Show answer' : 'Hide answer'
@@ -179,34 +177,16 @@ export default class MapContainer extends Component {
 
       {
         /*
-              <button onClick={this.handleClick}>
-                 {this.state.isToggleOn ? 'ON' : 'OFF'}
-              </button>
-
-              <button onClick={this.zoomOut}>
-              Show answer
-              </button>
-
-              <button onClick={this.zoomIn}>
-              Next
-              </button>
-
               // <Ons.Page>
               //   <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
               // </Ons.Page>
               */
-      } <
-      div ref = "map"
+      } <div ref = "map"
       style = {
         style
       } >
       loading map...
-      <
-      /div> <
-      div id = "quiz" > < /div> <
-      button id = "submit" > Submit Quiz < /button> <
-      div id = "results" > < /div> <
-      /div>
+      </div>
     )
   }
   }
