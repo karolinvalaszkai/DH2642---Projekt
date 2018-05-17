@@ -6,24 +6,125 @@ import MapContainer from './MapContainer'
 export default class QuizContainer extends Component {
 
 
-  const quizContainer = this.refs.quiz;
-  const resultsContainer = this.refs.results;
-  const submitButton = this.refs.submit;
+  buildQuiz() {
 
-  function buildQuiz() {
+    this.quizContainer = this.refs.quiz;
+    this.resultsContainer = this.refs.results;
+    const submitButton = this.refs.submit;
+
+    this.myQuestions = [{
+        question: "What country does this look like?",
+        answers: {
+          a: "Sweden",
+          b: "USA",
+          c: "France",
+          d: "Italy"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Italy",
+          b: "Sweden",
+          c: "USA",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: { a: "Spain",
+          b: "Canada",
+          c: "U.S.A.",
+          d: "Norway"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Greece",
+          b: "Cyprus",
+          c: "Italy",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "Bali",
+          c: "Japan",
+          d: "Thailand"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "d"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Vatican City State",
+          c: "Moldavia",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Australia",
+          b: "Indonesia",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "a"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "Denmark",
+          b: "Peru",
+          c: "Taiwan",
+          d: "China"
+        },
+        correctAnswer: "b"
+      },
+      {
+        question: "What country does this look like?",
+        answers: {
+          a: "India",
+          b: "China",
+          c: "Egypt",
+          d: "Croatia"
+        },
+        correctAnswer: "c"
+      }
+    ];
 
     // we'll need a place to store the HTML output
     const output = [];
 
     // for each question...
-    myQuestions.forEach(
+    this.myQuestions.forEach(
       (currentQuestion, questionNumber) => {
 
         // we'll want to store the list of answer choices
         const answers = [];
 
         // and for each available answer...
-        for (letter in currentQuestion.answers) {
+        for (var letter in currentQuestion.answers) {
 
           // ...add an HTML radio button
           answers.push(
@@ -44,19 +145,27 @@ export default class QuizContainer extends Component {
     );
 
     // finally combine our output list into one string of HTML and put it on the page
-    quizContainer.innerHTML = output.join('');
+    this.quizContainer.innerHTML = output.join('');
 
   }
 
-  function showResults() {
+
+  // constructor(props) {
+  //   super(props);
+  //
+  //     // This binding is necessary to make `this` work in the callback
+  //     this.buildQuiz = this.buildQuiz.bind(this);
+  //   }
+
+  showResults() {
     // gather answer containers from our quiz
-    const answerContainers = quizContainer.querySelectorAll('.answers');
+    const answerContainers = this.quizContainer.querySelectorAll('.answers');
 
     // keep track of user's answers
     let numCorrect = 0;
 
     // for each question...
-    myQuestions.forEach((currentQuestion, questionNumber) => {
+    this.myQuestions.forEach((currentQuestion, questionNumber) => {
 
       // find selected answer
       const answerContainer = answerContainers[questionNumber];
@@ -79,59 +188,22 @@ export default class QuizContainer extends Component {
     });
 
     // show number of correct answers out of total
-resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
+this.resultsContainer.innerHTML = `${numCorrect} out of ${this.myQuestions.length}`;
   }
 
-  // display quiz right away
-  buildQuiz();
-
-  // on submit, show results
-  submitButton.addEventListener('click', showResults);
 
 
-  const myQuestions = [{
-      question: "What country does this look like?",
-      answers: {
-        a: "Sweden",
-        b: "USA",
-        c: "France"
-        d: "Italy"
-      },
-      correctAnswer: "c"
-    },
-    {
-      question: "What country does this look like?",
-      answers: {
-        a: "Italy",
-        b: "Sweden",
-        c: "USA"
-        d: "China"
-
-      },
-      correctAnswer: "b"
-    },
-    {
-      question: "What country does this look like?",
-      answers: {
-        a: "Antarctica",
-        b: "Exploring the Pacific Ocean",
-        c: "Sitting in a tree",
-        d: "Minding his own business, so stop asking"
-      },
-      correctAnswer: "d"
-    }
-  ];
-
-}
 
 render(){
 
   return(
     <div>
       <div ref="quiz"></div>
-      <button ref="submit">Submit Quiz</button>
+      <button ref="submit" onClick = {this.showResults}>Submit Quiz</button>
       <div ref="results"></div>
     </div>
   )
+
+}
 
 }

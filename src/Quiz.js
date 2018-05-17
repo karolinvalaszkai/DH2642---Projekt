@@ -10,8 +10,8 @@ class Quiz extends Component {
   render() {
     return (
       <div>
-        <MapContainer google={this.props.google} />
         <QuizContainer/>
+        <MapContainer google={this.props.google} />
       </div>
     );
   }
