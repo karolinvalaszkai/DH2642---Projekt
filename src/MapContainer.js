@@ -17,7 +17,7 @@ export default class MapContainer extends Component {
 
 
   componentDidUpdate() {
-    this. zoomRate = 18;
+    this.zoomRate = 18;
 
     this.countries = [
                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
