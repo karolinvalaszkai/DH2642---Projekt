@@ -11,8 +11,6 @@ class Quiz extends Component {
     return (
       <div>
         <MapContainer google={this.props.google} onClick={console.log("Map clicked")} onDragend={console.log("Drag end")}/>
-      </div>
-      <div>
         <QuizContainer/>
       </div>
     );

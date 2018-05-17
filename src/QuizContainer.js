@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 //import * as Ons from 'react-onsenui';
+import MapContainer from './MapContainer'
 
 export default class QuizContainer extends Component {
 
