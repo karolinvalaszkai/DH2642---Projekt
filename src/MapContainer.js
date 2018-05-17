@@ -283,7 +283,7 @@ export default class MapContainer extends Component {
       zoomControl: false,
       rotateControl: false,
       fullscreenControl: false,
-      gestureHandling: false,
+      //gestureHandling: false,
 
 
 
