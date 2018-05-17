@@ -1,209 +1,103 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 //import * as Ons from 'react-onsenui';
-import MapContainer from './MapContainer'
+import data from './data';
+import Answers from './Answers';
+import Popup from './Popup';
+import MapContainer from './MapContainer';
 
 export default class QuizContainer extends Component {
+constructor(props) {
+        super(props);
+        this.state = {
+            nr: 0,
+            total: data.length,
+            showButton: false,
+            questionAnswered: false,
+            score: 0,
+            displayPopup: 'flex'
+        }
+        this.nextQuestion = this.nextQuestion.bind(this);
+        this.handleShowButton = this.handleShowButton.bind(this);
+        this.handleStartQuiz = this.handleStartQuiz.bind(this);
+        this.handleIncreaseScore = this.handleIncreaseScore.bind(this);
+    }
 
+    pushData(nr) {
+        this.setState({
+            question: data[nr].question,
+            answers: [data[nr].answers[0], data[nr].answers[1], data[nr].answers[2], data[nr].answers[3] ],
+            correct: data[nr].correct,
+            nr: this.state.nr + 1
+        });
+    }
 
-  buildQuiz() {
+    componentWillMount() {
+        let { nr } = this.state;
+        this.pushData(nr);
+    }
 
-    this.quizContainer = this.refs.quiz;
-    this.resultsContainer = this.refs.results;
-    const submitButton = this.refs.submit;
+    nextQuestion() {
+        let { nr, total, score } = this.state;
 
-    this.myQuestions = [{
-        question: "What country does this look like?",
-        answers: {
-          a: "Sweden",
-          b: "USA",
-          c: "France",
-          d: "Italy"
-        },
-        correctAnswer: "c"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Italy",
-          b: "Sweden",
-          c: "USA",
-          d: "China"
-        },
-        correctAnswer: "b"
-      },
-      {
-        question: "What country does this look like?",
-        answers: { a: "Spain",
-          b: "Canada",
-          c: "U.S.A.",
-          d: "Norway"
-        },
-        correctAnswer: "c"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Greece",
-          b: "Cyprus",
-          c: "Italy",
-          d: "Croatia"
-        },
-        correctAnswer: "c"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "India",
-          b: "Bali",
-          c: "Japan",
-          d: "Thailand"
-        },
-        correctAnswer: "a"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Denmark",
-          b: "Indonesia",
-          c: "Taiwan",
-          d: "China"
-        },
-        correctAnswer: "d"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Denmark",
-          b: "Vatican City State",
-          c: "Moldavia",
-          d: "China"
-        },
-        correctAnswer: "b"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Australia",
-          b: "Indonesia",
-          c: "Taiwan",
-          d: "China"
-        },
-        correctAnswer: "a"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "Denmark",
-          b: "Peru",
-          c: "Taiwan",
-          d: "China"
-        },
-        correctAnswer: "b"
-      },
-      {
-        question: "What country does this look like?",
-        answers: {
-          a: "India",
-          b: "China",
-          c: "Egypt",
-          d: "Croatia"
-        },
-        correctAnswer: "c"
-      }
-    ];
-
-    // we'll need a place to store the HTML output
-    const output = [];
-
-    // for each question...
-    this.myQuestions.forEach(
-      (currentQuestion, questionNumber) => {
-
-        // we'll want to store the list of answer choices
-        const answers = [];
-
-        // and for each available answer...
-        for (var letter in currentQuestion.answers) {
-
-          // ...add an HTML radio button
-          answers.push(
-            `<label>
-                  <input type="radio" name="question${questionNumber}" value="${letter}">
-                  ${letter} :
-                  ${currentQuestion.answers[letter]}
-                </label>`
-          );
+        if(nr === total){
+            this.setState({
+                displayPopup: 'flex'
+            });
+        } else {
+            this.pushData(nr);
+            this.setState({
+                showButton: false,
+                questionAnswered: false
+            });
         }
 
-        // add this question and its answers to the output
-        output.push(
-          `<div class="question"> ${currentQuestion.question} </div>
-              <div class="answers"> ${answers.join('')} </div>`
+    }
+
+    handleShowButton() {
+        this.setState({
+            showButton: true,
+            questionAnswered: true
+        })
+    }
+
+    handleStartQuiz() {
+        this.setState({
+            displayPopup: 'none',
+            nr: 1
+        });
+    }
+
+    handleIncreaseScore() {
+        this.setState({
+            score: this.state.score + 1
+        });
+    }
+
+    render() {
+        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score} = this.state;
+
+        return (
+            <div className="container">
+
+                <Popup style={{display: displayPopup}} score={score} total={total} startQuiz={this.handleStartQuiz}/>
+
+                <div className="row">
+                    <div className="col-lg-10 col-lg-offset-1">
+                        <div id="question">
+                            <h4>Question {nr}/{total}</h4>
+                            <p>{question}</p>
+                        </div>
+                        <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore}/>
+                        <div id="submit">
+                            {showButton ? <button className="fancy-btn" onClick={this.nextQuestion} >{nr===total ? 'Finish quiz' : 'Next question'}</button> : null}
+                        </div>
+                    </div>
+                </div>
+              <MapContainer google={this.props.google} />
+            </div>
         );
-      }
-    );
-
-    // finally combine our output list into one string of HTML and put it on the page
-    this.quizContainer.innerHTML = output.join('');
-
-  }
+    }
+};
 
 
-  // constructor(props) {
-  //   super(props);
-  //
-  //     // This binding is necessary to make `this` work in the callback
-  //     this.buildQuiz = this.buildQuiz.bind(this);
-  //   }
-
-  showResults() {
-    // gather answer containers from our quiz
-    const answerContainers = this.quizContainer.querySelectorAll('.answers');
-
-    // keep track of user's answers
-    let numCorrect = 0;
-
-    // for each question...
-    this.myQuestions.forEach((currentQuestion, questionNumber) => {
-
-      // find selected answer
-      const answerContainer = answerContainers[questionNumber];
-      const selector = 'input[name=question' + questionNumber + ']:checked';
-      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-      // if answer is correct
-      if (userAnswer === currentQuestion.correctAnswer) {
-        // add to the number of correct answers
-        numCorrect++;
-
-        // color the answers green
-        answerContainers[questionNumber].style.color = 'lightgreen';
-      }
-      // if answer is wrong or blank
-      else {
-        // color the answers red
-        answerContainers[questionNumber].style.color = 'red';
-      }
-    });
-
-    // show number of correct answers out of total
-this.resultsContainer.innerHTML = `${numCorrect} out of ${this.myQuestions.length}`;
-  }
-
-
-
-
-render(){
-
-  return(
-    <div>
-      <div ref="quiz"></div>
-      <button ref="submit" onClick = {this.showResults}>Submit Quiz</button>
-      <div ref="results"></div>
-    </div>
-  )
-
-}
-
-}
