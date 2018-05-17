@@ -134,19 +134,28 @@ export default class MapContainer extends Component {
     ];
 
   componentDidUpdate() {
-    this. zoomRate = 18;
+    this. zoomRate = 17;
 
     this.countries = [
                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
-                {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
+                {country: "Sweden", coordinates: {lat: 59.3470962, lng: 18.0724084}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
+<<<<<<< HEAD
                 {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
+=======
+                {country: "India", coordinates: {lat: 27.174000, lng: 78.042100}},
+                {country: "China", coordinates: {lat: 39.916667, lng: 116.396973}},
+                {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
+                {country: "Australia", coordinates: {lat: -33.857197, lng: 151.21514}},
+                {country: "Peru", coordinates: {lat: -13.163056, lng: -72.545556}},
+                {country: "Egypt", coordinates: {lat: 29.979175, lng: 31.134358}}
+>>>>>>> 7e01021ee44632002e1104ac39436691dda532a2
                 ];
 
     console.log("componentDidUpdate",this.countryNumber)
@@ -161,7 +170,7 @@ export default class MapContainer extends Component {
     }
 
     if (this.state.isToggleOn === true){
-      this.zoomRate = 18;
+      this.zoomRate = 17;
       this.countryNumber = this.countryNumber + 1;
     };
     if (this.state.isToggleOn === false){
@@ -216,7 +225,7 @@ export default class MapContainer extends Component {
 
 
 
-        mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
+        mapTypeId: 'hybrid' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
       })
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
