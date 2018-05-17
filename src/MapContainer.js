@@ -24,14 +24,14 @@ export default class MapContainer extends Component {
                 {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
-                {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
+                {country: "Vatican City State", coordinates: {lat: 41.901944, lng: 12.456944}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
                 ];
-                
+
     console.log("componentDidUpdate",this.countryNumber)
     console.log("componentDidUpdate countries",this.countries)
     
