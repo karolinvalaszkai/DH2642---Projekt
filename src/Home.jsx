@@ -3,6 +3,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase } from './firebase';
 import { Link } from 'react-router-dom';
 import Scores from './Scores';
+import './Home.css';
 
 class Home extends Component {
   state = {
@@ -37,19 +38,23 @@ class Home extends Component {
   render() {
     if (!this.state.isSignedIn) {
       return (
-        <div>
-          <h1>My App</h1>
-          <p>Please sign-in:</p>
+        <div className="startContainer">
+          <div className="welcomeContainer">
+            <h3>Welcome to</h3>
+            <h1>Quizmania!</h1>
+          </div>
+          <div className="loginButtonContainer">
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
           />
+          </div>
         </div>
       );
     }
     return (
       <div>
-        <Scores user={this.state.userProfile}/>
+        <Scores user={this.state.userProfile} />
         <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
         <Link to="/quiz">Start Quiz!</Link>
       </div>

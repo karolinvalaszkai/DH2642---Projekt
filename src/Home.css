@@ -1,0 +1,23 @@
+.welcomeContainer {
+  margin-top: 15%;
+  width: 100vw;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginButtonContainer {
+  padding: 10% 0;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  left: 0;
+}
+
+.startContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
