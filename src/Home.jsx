@@ -28,16 +28,18 @@ class Home extends Component {
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user, userProfile: user });
       const ref = firestore.collection('users');
-      ref
-        .doc(user.uid)
-        .set({
-          name: user.displayName,
-          img: user.photoURL,
-          email: user.email
-        })
-        .then(() => {
-          console.log('User created or updated');
-        });
+      if (user) {
+        ref
+          .doc(user.uid)
+          .set({
+            name: user.displayName,
+            img: user.photoURL,
+            email: user.email
+          })
+          .then(() => {
+            console.log('User created or updated');
+          });
+      }
     });
   }
 
@@ -67,7 +69,9 @@ class Home extends Component {
       <div>
         <Scores userId={this.state.userProfile.uid} />
         <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-        <Link to="/quiz">Start Quiz!</Link>
+        <div className="loginButtonContainer quizBtn">
+          <Link to="/quiz">Start Quiz</Link>
+        </div>
       </div>
     );
   }

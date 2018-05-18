@@ -9,6 +9,7 @@
 }
 
 .loginButtonContainer {
+  z-index: 100;
   padding: 10% 0;
   position: fixed;
   bottom: 0;
@@ -20,4 +21,10 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+}
+
+.quizBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
