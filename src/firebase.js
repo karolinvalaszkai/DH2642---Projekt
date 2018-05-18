@@ -9,4 +9,8 @@ firebase.initializeApp({
   projectId: 'dm2518-quizmania'
 });
 
-export { firebase };
+const firestore = firebase.firestore();
+const settings = { /* your settings... */ timestampsInSnapshots: true };
+firestore.settings(settings);
+
+export { firebase, firestore };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { firebase } from './firebase';
+import { firebase, firestore } from './firebase';
 import { Link } from 'react-router-dom';
 import Scores from './Scores';
 import './Home.css';
@@ -27,6 +27,17 @@ class Home extends Component {
     // state changes.
     this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
       this.setState({ isSignedIn: !!user, userProfile: user });
+      const ref = firestore.collection('users');
+      ref
+        .doc(user.uid)
+        .set({
+          name: user.displayName,
+          img: user.photoURL,
+          email: user.email
+        })
+        .then(() => {
+          console.log('User created or updated');
+        });
     });
   }
 
@@ -44,17 +55,17 @@ class Home extends Component {
             <h1>Quizmania!</h1>
           </div>
           <div className="loginButtonContainer">
-          <StyledFirebaseAuth
-            uiConfig={this.uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
+            <StyledFirebaseAuth
+              uiConfig={this.uiConfig}
+              firebaseAuth={firebase.auth()}
+            />
           </div>
         </div>
       );
     }
     return (
       <div>
-        <Scores user={this.state.userProfile} />
+        <Scores userId={this.state.userProfile.uid} />
         <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
         <Link to="/quiz">Start Quiz!</Link>
       </div>
