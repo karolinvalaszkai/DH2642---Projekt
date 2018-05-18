@@ -5,27 +5,25 @@ class Scores extends Component {
   constructor(props) {
     super(props);
     this.userRef = firestore.collection('users').doc(this.props.userId);
-    this.state = {
-      userName: ''
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    this.userRef.get().then(doc => {
-      const data = doc.data();
-      this.setState({
-        userName: data.name
-      });
+    // Updating the `someDocument` local state attribute when the Cloud Firestore 'someDocument' document changes.
+    this.unregisterUserObserver = this.userRef.onSnapshot(snap => {
+      this.setState({ user: snap.data() });
     });
+  }
+
+  componentWillUnmount() {
+    // Un-register the listeners.
+    this.unregisterUserObserver();
   }
 
   render() {
     return (
       <div>
-        <h2>{this.state.userName}</h2>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        <h2>{this.state.user ? this.state.user.name : ''}</h2>
       </div>
     );
   }
