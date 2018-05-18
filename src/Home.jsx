@@ -68,7 +68,7 @@ class Home extends Component {
     return (
       <div>
         <Scores userId={this.state.userProfile.uid} />
-        <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
+        {/* <a onClick={() => firebase.auth().signOut()}>Sign-out</a> */}
         <div className="loginButtonContainer quizBtn">
           <Link to="/quiz">Start Quiz</Link>
         </div>
