@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import { firestore } from './firebase';
 import './styles/Scores.css';
+import uuid from 'uuid/v4';
 
 class Scores extends Component {
   constructor(props) {
     super(props);
     this.userId = this.props.userId;
-    this.state = {};
+    this.state = {
+      scores: [],
+      users: []
+    };
   }
 
   componentDidMount() {
-    // Updating the `user` local state attribute when the Cloud Firestore 'user' document changes.
-    this.unregisterUserObserver = firestore
+    // Updating the `users` local state attribute when the Cloud Firestore 'users' collection changes.
+    this.unregisterUsersObserver = firestore
       .collection('users')
-      .doc(this.userId)
       .onSnapshot(snap => {
-        this.setState({ user: snap.data() });
+        let users = {};
+        snap.forEach(doc => {
+          users[doc.id] = doc.data();
+        });
+        this.setState({ users: users });
       });
     // Updating the `userScore` local state attribute when the Cloud Firestore 'scores' collection changes.
     this.unregisterUserScoreObserver = firestore
@@ -26,15 +33,36 @@ class Scores extends Component {
       .onSnapshot(snap => {
         this.setState({ userScore: snap.docs[0].data().score });
       });
+
+    this.unregisterScoresObserver = firestore
+      .collection('scores')
+      .orderBy('score', 'desc')
+      .limit(5)
+      .onSnapshot(snap => {
+        let scores = [];
+        snap.forEach(doc => {
+          scores.push(doc.data());
+        });
+        this.setState({ scores: scores });
+      });
   }
 
   componentWillUnmount() {
     // Un-register the listeners.
-    this.unregisterUserObserver();
+    this.unregisterUsersObserver();
     this.unregisterUserScoreObserver();
+    this.unregisterScoresObserver();
   }
 
   render() {
+    const highscores = this.state.scores.map(score => {
+      return (
+        <tr key={uuid()}>
+          <td className="firstCol">{this.state.users[score.user].name}</td>
+          <td className="secondCol">{score.score}</td>
+        </tr>
+      );
+    });
     return (
       <div>
         <div className="welcomeContainer">
@@ -52,24 +80,7 @@ class Scores extends Component {
         <div className="scoresTableContainer">
           <h3>Worldwide Highscore:</h3>
           <table className="scoresTable">
-            <tbody>
-              {/* <tr>
-              <th className="firstCol">Name</th>
-              <th className="secondCol">Score</th>
-            </tr> */}
-              <tr>
-                <td className="firstCol">Axel Ekwall</td>
-                <td className="secondCol">7</td>
-              </tr>
-              <tr>
-                <td className="firstCol">Axel Ekwall</td>
-                <td className="secondCol">7</td>
-              </tr>
-              <tr>
-                <td className="firstCol">Axel Ekwall</td>
-                <td className="secondCol">7</td>
-              </tr>
-            </tbody>
+            <tbody>{highscores}</tbody>
           </table>
         </div>
       </div>
