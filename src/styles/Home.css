@@ -1,0 +1,58 @@
+.welcomeContainer {
+  margin-top: 10vh;
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.startTitle {
+  text-align: center;
+  color: white;
+}
+
+.loginContainer {
+  z-index: 100;
+  padding: 10% 0;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.startContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-position: center;
+  background-size: cover;
+}
+
+.quizmaniaBtn {
+  border-radius: 10px;
+  border-width: 0;
+  text-decoration: none;
+  background-color: lightgreen;
+}
+
+.logoutBtn {
+  position: fixed;
+  padding: 7px 10px;
+  background-color: lightcoral;
+  font-weight: bold;
+  top: 10px;
+  left: 10px;
+  font-size: 15px;
+}
+.startBtn {
+  text-align: center;
+  color: black;
+  padding: 15px 30px;
+  width: 50%;
+  font-size: 26px;
+}
