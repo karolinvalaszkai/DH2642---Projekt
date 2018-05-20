@@ -50,3 +50,23 @@
   background-color: white;
   width: 34vw;
 }
+
+.feedbackContainer {
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 20px 50px;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.feedbackContainer button {
+  text-align: center;
+  color: black;
+  padding: 15px 30px;
+  font-size: 22px;
+}
