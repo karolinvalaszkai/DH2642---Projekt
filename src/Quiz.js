@@ -12,7 +12,6 @@ class Quiz extends Component {
     return (
       <div>
         <QuizContainer/>
-        <MapContainer google={this.props.google} />
       </div>
     );
   }

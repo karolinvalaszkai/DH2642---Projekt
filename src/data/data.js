@@ -1,43 +1,55 @@
 export default [
     {
-        question: 'What does CSS stand for?',
-        answers: ['Computer Style Sheets', 'Creative Style Sheets', 'Cascading Style Sheets', 'Colorful Style Sheets'],
+        question: "What country does this look like?",
+        answers: ["Sweden","USA","France","Italy"],
         correct: 3
     },
 
     {
-        question: 'Where in an HTML document is the correct place to refer to an external style sheet?',
-        answers: ['In the <head> section', 'In the <body> section', 'At the end of the document', 'You can\'t refer to an external style sheet'],
-        correct: 1
+        question: "What country does this look like?",
+        answers: ["Italy", "Sweden", "USA", "China"],
+        correct: 2
     },    
     {
-        question: 'Which HTML tag is used to define an internal style sheet?',
-        answers: ['<style>', '<script>', '<headStyle>', '<css>'],
-        correct: 1
+        question: "What country does this look like?",
+        answers: ["Spain", "Canada", "U.S.A.", "Norway"],
+        correct: 3
     },    
     {
-        question: 'Which HTML attribute is used to define inline styles?',
-        answers: ['class', 'style', 'font', 'styles'],
-        correct: 2
-    },
-    {
-        question: 'Which is the correct CSS syntax?',
-        answers: ['{body:color=black;}', '{body;color:black;}', 'body:color=black;', 'body {color: black;}'],
-        correct: 4
-    },
-    {
-        question: 'How do you insert a comment in a CSS file?',
-        answers: ['\' this is a comment', '/* this is a comment */', '// this is a comment', '// this is a comment //'],
-        correct: 2
-    },
-    {
-        question: 'Which property is used to change the background color?',
-        answers: ['color', 'bgcolor', 'background-color', 'bgColor'],
+        question: "What country does this look like?",
+        answers: ["Greece", "Cyprus", "Italy", "Croatia"],
         correct: 3
     },
     {
-        question: 'How do you add a background color for all <h1> elements?',
-        answers: ['all.h1 {background-color:#FFFFFF;}', 'h1.setAll {background-color:#FFFFFF;}', 'h1.all {background-color:#FFFFFF;}', 'h1 {background-color:#FFFFFF;}'],
+        question: "What country does this look like?",
+        answers: ["India", "Bali", "Japan", "Thailand"],
+        correct: 1
+    },
+    {
+        question: "What country does this look like?",
+        answers: ["Denmark", "Indonesia", "Taiwan", "China"],
         correct: 4
+    },
+    {
+        question: "What country does this look like?",
+        answers: ["Denmark", "Vatican City State", "Moldavia", "China"],
+        correct: 2
+    },
+    {
+        question: "What country does this look like?",
+        answers: ["Australia", "Indonesia", "Taiwan", "China"],
+        correct: 1
+    },
+    {
+        question: "What country does this look like?",
+        answers: ["Denmark", "Peru", "Taiwan", "China"],
+        correct: 2
+    },
+    {
+        question: "What country does this look like?",
+        answers: ["India", "China", "Egypt", "Croatia"],
+        correct: 3
     }
 ]
+
+
