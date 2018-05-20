@@ -3,7 +3,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { firebase, firestore } from './firebase';
 import { Link } from 'react-router-dom';
 import Scores from './Scores';
-import './Home.css';
+import './styles/Home.css';
 import earth from './images/earth.jpg';
 
 const backgroundImg = {

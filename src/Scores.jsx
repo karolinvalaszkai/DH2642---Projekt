@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { firestore } from './firebase';
+import './styles/Scores.css';
 
 class Scores extends Component {
   constructor(props) {
