@@ -1,7 +1,8 @@
 .welcomeContainer {
-  margin-top: 15%;
+  margin-top: 10%;
   width: 100vw;
-  height: 40vh;
+  height: 20vh;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,6 +22,8 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  background-position: center;
+  background-size: cover;
 }
 
 .quizBtn {
