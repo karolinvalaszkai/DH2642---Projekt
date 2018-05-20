@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper } from 'google-maps-react';
-import MapContainer from './MapContainer';
+import QuizContainer from './QuizContainer';
 
 class Quiz extends Component {
   render() {
     return (
       <div>
-        <MapContainer
-          google={this.props.google}
-          ref={this.props.onMapLoad}
-          zoom={this.props.zoom}
-        />
+        <QuizContainer />
       </div>
     );
   }

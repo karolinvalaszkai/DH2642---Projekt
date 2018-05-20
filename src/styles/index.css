@@ -9,3 +9,12 @@ body {
 #map {
   height: 100%;
 }
+
+.right {
+	background-color: #3fea6f;
+}
+
+.wrong {
+	background-color: #f74557;
+}
+
