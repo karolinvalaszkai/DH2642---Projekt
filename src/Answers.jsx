@@ -1,89 +1,75 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import data from './data';
 
 class Answers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAnswered: false,
-      classNames: ['', '', '', '']
-    };
-
-    this.checkAnswer = this.checkAnswer.bind(this);
-  }
-
-  checkAnswer(e) {
-    let { isAnswered } = this.props;
-
-    if (!isAnswered) {
-      let elem = e.currentTarget;
-      let { correct, increaseScore } = this.props;
-      let answer = Number(elem.dataset.id);
-      let updatedClassNames = this.state.classNames;
-
-      if (answer === correct) {
-        updatedClassNames[answer - 1] = 'right';
-        increaseScore();
-      } else {
-        updatedClassNames[answer - 1] = 'wrong';
-      }
-
-      this.setState({
-        classNames: updatedClassNames
-      });
-
-      this.props.showButton();
+  next(question) {
+    if (question <= 8) {
+      return (
+        <button
+          className="quizmaniaBtn startBtn"
+          onClick={this.props.nextQuestion}
+        >
+          Next
+        </button>
+      );
+    } else {
+      return (
+        <Link className="quizmaniaBtn startBtn" to="/">
+          Next
+        </Link>
+      );
     }
   }
 
-  shouldComponentUpdate() {
-    this.setState({
-      classNames: ['', '', '', '']
-    });
-    return true;
-  }
-
   render() {
-    let { answers } = this.props;
-    let { classNames } = this.state;
-
-    let transition = {
-      transitionName: 'example',
-      transitionEnterTimeout: 500,
-      transitionLeaveTimeout: 300
-    };
-
-    return (
-      <div id="answers">
-        <button
-          onClick={this.checkAnswer}
-          className={classNames[0]}
-          data-id="1"
-        >
-          <p>{answers[0]}</p>
-        </button>
-        <button
-          onClick={this.checkAnswer}
-          className={classNames[1]}
-          data-id="2"
-        >
-          <p>{answers[1]}</p>
-        </button>
-        <button
-          onClick={this.checkAnswer}
-          className={classNames[2]}
-          data-id="3"
-        >
-          <p>{answers[2]}</p>
-        </button>
-        <button
-          onClick={this.checkAnswer}
-          className={classNames[3]}
-          data-id="4"
-        >
-          <p>{answers[3]}</p>
-        </button>
-      </div>
-    );
+    if (this.props.isAnswered) {
+      return (
+        <div className="answers">
+          <div className="feedbackContainer">
+            <p className="feedbackText">
+              {this.props.isCorrect
+                ? 'Your answer was correct!'
+                : 'Wrong answer!'}
+            </p>
+            {this.next(this.props.question)}
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="answers">
+          <div className="answersCol">
+            <button
+              className="answersBtn"
+              onClick={() => this.props.checkAnswer(1)}
+            >
+              {data[this.props.question].answers[0]}
+            </button>
+            <button
+              className="answersBtn"
+              onClick={() => this.props.checkAnswer(2)}
+            >
+              {data[this.props.question].answers[1]}
+            </button>
+          </div>
+          <div className="answersCol">
+            <button
+              className="answersBtn"
+              onClick={() => this.props.checkAnswer(3)}
+            >
+              {data[this.props.question].answers[2]}
+            </button>
+            <button
+              className="answersBtn"
+              onClick={() => this.props.checkAnswer(4)}
+            >
+              {data[this.props.question].answers[3]}
+            </button>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
