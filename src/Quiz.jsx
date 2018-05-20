@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { firebase, firestore } from './firebase';
 import Answers from './Answers';
 import data from './data';
 import './styles/Quiz.css';
@@ -14,34 +15,46 @@ const mapStyle = {
   margin: '0',
   padding: '0'
 };
+
 class Quiz extends Component {
   constructor() {
     super();
     this.state = {
       question: 0,
       score: 0,
+      isCorrect: false,
       isAnswered: false,
       zoom: 14
     };
     this.checkAnswer = this.checkAnswer.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
   }
 
   checkAnswer(answer) {
-    console.log(answer);
     if (!this.state.isAnswered) {
       if (answer === data[this.state.question].correct) {
         this.setState({
           score: this.state.score + 1,
+          isCorrect: true,
           isAnswered: true,
-          question: this.state.question + 1
+          zoom: 8
         });
       } else {
         this.setState({
+          isCorrect: false,
           isAnswered: true,
-          question: this.state.question + 1
+          zoom: 6
         });
       }
     }
+  }
+
+  nextQuestion() {
+    this.setState({
+      isAnswered: false,
+      question: this.state.question + 1,
+      zoom: 14
+    });
   }
 
   render() {
@@ -53,7 +66,8 @@ class Quiz extends Component {
         <Answers
           isAnswered={this.state.isAnswered}
           question={this.state.question}
-          showButton={this.handleShowButton}
+          nextQuestion={this.nextQuestion}
+          isCorrect={this.state.isCorrect}
           checkAnswer={this.checkAnswer}
         />
         <Map
