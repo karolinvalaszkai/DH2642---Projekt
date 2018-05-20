@@ -58,10 +58,12 @@ class Home extends Component {
       return (
         <div className="startContainer" style={backgroundImg}>
           <div className="welcomeContainer">
-            <h3>Welcome to</h3>
-            <h1>Quizmania!</h1>
+            <div className="startTitle">
+              <h3>Welcome to</h3>
+              <h1>Quizmania!</h1>
+            </div>
           </div>
-          <div className="loginButtonContainer">
+          <div className="loginContainer">
             <StyledFirebaseAuth
               uiConfig={this.uiConfig}
               firebaseAuth={firebase.auth()}
@@ -72,10 +74,15 @@ class Home extends Component {
     }
     return (
       <div>
+        <button
+          className="logoutBtn quizmaniaBtn"
+          onClick={() => firebase.auth().signOut()}
+        >
+          X
+        </button>
         <Scores userId={this.state.userProfile.uid} />
-        <a onClick={() => firebase.auth().signOut()}>Sign-out</a>
-        <div className="loginButtonContainer quizBtn">
-          <Link to="/quiz">Start Quiz</Link>
+        <div className="loginContainer">
+          <Link className="quizmaniaBtn startBtn" to="/quiz">Start Quiz</Link>
         </div>
       </div>
     );

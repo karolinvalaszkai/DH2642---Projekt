@@ -1,0 +1,35 @@
+.scoresTitle {
+  text-align: center;
+  color: #003399;
+}
+
+.scoreName {
+  color: lightslategrey;
+}
+
+.scoresTableContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scoresTable {
+  /* margin: 0 auto; */
+  width: 60%;
+}
+
+.firstCol {
+  text-align: start;
+}
+
+.secondCol {
+  text-align: end;
+}
+
+.userScore {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

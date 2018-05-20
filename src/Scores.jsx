@@ -24,7 +24,39 @@ class Scores extends Component {
   render() {
     return (
       <div>
-        <h2>{this.state.user ? this.state.user.name : ''}</h2>
+        <div className="welcomeContainer">
+          <div className="scoresTitle">
+            <h1>Quizmania</h1>
+            <h3 className="scoreName">
+              {this.state.user ? this.state.user.name : ''}
+            </h3>
+          </div>
+        </div>
+        <div className="userScore">
+          <h3>Your Highscore:</h3>
+          <p>5 points</p>
+        </div>
+        <div className="scoresTableContainer">
+          <h3>Worldwide Highscore:</h3>
+          <table className="scoresTable">
+            {/* <tr>
+              <th className="firstCol">Name</th>
+              <th className="secondCol">Score</th>
+            </tr> */}
+            <tr>
+              <td className="firstCol">Axel Ekwall</td>
+              <td className="secondCol">7</td>
+            </tr>
+            <tr>
+              <td className="firstCol">Axel Ekwall</td>
+              <td className="secondCol">7</td>
+            </tr>
+            <tr>
+              <td className="firstCol">Axel Ekwall</td>
+              <td className="secondCol">7</td>
+            </tr>
+          </table>
+        </div>
       </div>
     );
   }
