@@ -5,20 +5,33 @@ import './styles/Scores.css';
 class Scores extends Component {
   constructor(props) {
     super(props);
-    this.userRef = firestore.collection('users').doc(this.props.userId);
+    this.userId = this.props.userId;
     this.state = {};
   }
 
   componentDidMount() {
-    // Updating the `someDocument` local state attribute when the Cloud Firestore 'someDocument' document changes.
-    this.unregisterUserObserver = this.userRef.onSnapshot(snap => {
-      this.setState({ user: snap.data() });
-    });
+    // Updating the `user` local state attribute when the Cloud Firestore 'user' document changes.
+    this.unregisterUserObserver = firestore
+      .collection('users')
+      .doc(this.userId)
+      .onSnapshot(snap => {
+        this.setState({ user: snap.data() });
+      });
+    // Updating the `userScore` local state attribute when the Cloud Firestore 'scores' collection changes.
+    this.unregisterUserScoreObserver = firestore
+      .collection('scores')
+      .where('user', '==', this.userId)
+      .orderBy('score', 'desc')
+      .limit(1)
+      .onSnapshot(snap => {
+        this.setState({ userScore: snap.docs[0].data().score });
+      });
   }
 
   componentWillUnmount() {
     // Un-register the listeners.
     this.unregisterUserObserver();
+    this.unregisterUserScoreObserver();
   }
 
   render() {
@@ -34,27 +47,29 @@ class Scores extends Component {
         </div>
         <div className="userScore">
           <h3>Your Highscore:</h3>
-          <p>5 points</p>
+          <p>{this.state.userScore ? this.state.userScore : '0'} points</p>
         </div>
         <div className="scoresTableContainer">
           <h3>Worldwide Highscore:</h3>
           <table className="scoresTable">
-            {/* <tr>
+            <tbody>
+              {/* <tr>
               <th className="firstCol">Name</th>
               <th className="secondCol">Score</th>
             </tr> */}
-            <tr>
-              <td className="firstCol">Axel Ekwall</td>
-              <td className="secondCol">7</td>
-            </tr>
-            <tr>
-              <td className="firstCol">Axel Ekwall</td>
-              <td className="secondCol">7</td>
-            </tr>
-            <tr>
-              <td className="firstCol">Axel Ekwall</td>
-              <td className="secondCol">7</td>
-            </tr>
+              <tr>
+                <td className="firstCol">Axel Ekwall</td>
+                <td className="secondCol">7</td>
+              </tr>
+              <tr>
+                <td className="firstCol">Axel Ekwall</td>
+                <td className="secondCol">7</td>
+              </tr>
+              <tr>
+                <td className="firstCol">Axel Ekwall</td>
+                <td className="secondCol">7</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
