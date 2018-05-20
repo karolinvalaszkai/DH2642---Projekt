@@ -82,7 +82,15 @@ class Home extends Component {
         </button>
         <Scores userId={this.state.userProfile.uid} />
         <div className="loginContainer">
-          <Link className="quizmaniaBtn startBtn" to="/quiz">Start Quiz</Link>
+          <Link
+            className="quizmaniaBtn startBtn"
+            to={{
+              pathname: '/quiz',
+              state: { userId: this.state.userProfile.uid }
+            }}
+          >
+            Start Quiz
+          </Link>
         </div>
       </div>
     );

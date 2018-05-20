@@ -17,9 +17,10 @@ const mapStyle = {
 };
 
 class Quiz extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      userId: props.location.state.userId,
       question: 0,
       score: 0,
       isCorrect: false,
@@ -45,6 +46,18 @@ class Quiz extends Component {
           isAnswered: true,
           zoom: 6
         });
+      }
+      if (this.state.question > 8) {
+        firestore
+          .collection('scores')
+          .add({
+            score: this.state.score,
+            user: this.state.userId,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .catch(error => {
+            console.log(error);
+          });
       }
     }
   }
