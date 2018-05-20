@@ -7,7 +7,7 @@ class Answers extends Component {
     if (question <= 8) {
       return (
         <button
-          className="quizmaniaBtn startBtn"
+          className="quizmaniaBtn feedbackBtn"
           onClick={this.props.nextQuestion}
         >
           Next
@@ -15,7 +15,7 @@ class Answers extends Component {
       );
     } else {
       return (
-        <Link className="quizmaniaBtn startBtn" to="/">
+        <Link className="quizmaniaBtn feedbackBtn" to="/">
           Next
         </Link>
       );
