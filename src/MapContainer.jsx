@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-//import * as Ons from 'react-onsenui';
 
-export default class MapContainer extends Component {
-  // state = {
-  //   locations: [
-  //     { name: "New York County Supreme Court", location: {lat: 40.7143033, lng: -74.0036919} },
-  //     { name: "Queens County Supreme Court", location: {lat: 40.7046946, lng: -73.8091145} },
-  //     { name: "Kings County Supreme Court", location: {lat: 40.6940226, lng: -73.9890967} },
-  //     { name: "Richmond County Supreme Court", location: {lat: 40.6412336, lng: -74.0768597} },
-  //     { name: "Bronx Supreme Court", location: {lat: 40.8262388, lng: -73.9235238} }
-  //   ]
-  // }
+class MapContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isToggleOn: true
+    };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+    this.showHideAnswer = this.showHideAnswer.bind(this);
+  }
 
   componentDidUpdate() {
     this.zoomRate = 17;
@@ -56,19 +56,6 @@ export default class MapContainer extends Component {
   }
 
   loadMap() {
-    // var countries = [
-    //                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
-    //                 {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
-    //                 ];
-
     if (this.props && this.props.google) {
       // checks to make sure that props have been passed
 
@@ -115,17 +102,6 @@ export default class MapContainer extends Component {
         }
       });
     }
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isToggleOn: true
-    };
-
-    // This binding is necessary to make `this` work in the callback
-    this.handleClick = this.handleClick.bind(this);
-    this.showHideAnswer = this.showHideAnswer.bind(this);
   }
 
   handleClick() {
@@ -175,3 +151,5 @@ export default class MapContainer extends Component {
     );
   }
 }
+
+export default MapContainer;
