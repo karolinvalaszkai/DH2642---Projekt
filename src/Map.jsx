@@ -29,30 +29,48 @@ class Map extends Component {
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
-      const mapConfig = Object.assign(
-        {},
-        {
-          center: this.props.center,
-          zoom: this.props.zoom,
-          streetViewControl: false,
-          scaleControl: false,
-          mapTypeControl: false,
-          panControl: false,
-          zoomControl: false,
-          rotateControl: false,
-          fullscreenControl: false,
-          gestureHandling: 'none',
-          mapTypeId: 'satellite'
-        }
-      );
-
-      this.map = new maps.Map(node, mapConfig);
-
       if (this.props.marker) {
+        const mapConfig = Object.assign(
+          {},
+          {
+            center: this.props.center,
+            zoom: this.props.zoom,
+            streetViewControl: false,
+            scaleControl: false,
+            mapTypeControl: false,
+            panControl: false,
+            zoomControl: false,
+            rotateControl: false,
+            fullscreenControl: false,
+            gestureHandling: 'none',
+            mapTypeId: 'hybrid' //'satellite'
+          }
+        );
+  
+        this.map = new maps.Map(node, mapConfig);
         this.marker = new google.maps.Marker({
-          position: this.props.center, // sets position of marker to specified location
+          position: this.props.center,
           map: this.map
         });
+      } else {
+        const mapConfig = Object.assign(
+          {},
+          {
+            center: this.props.center,
+            zoom: this.props.zoom,
+            streetViewControl: false,
+            scaleControl: false,
+            mapTypeControl: false,
+            panControl: false,
+            zoomControl: false,
+            rotateControl: false,
+            fullscreenControl: false,
+            gestureHandling: 'none',
+            mapTypeId: 'satellite'
+          }
+        );
+  
+        this.map = new maps.Map(node, mapConfig);
       }
     }
   }

@@ -23,7 +23,6 @@ class Quiz extends Component {
 
   componentDidUpdate() {
     if (this.state.question > 8) {
-      console.log(this.state.score);
       firestore
         .collection('scores')
         .add({
@@ -73,6 +72,7 @@ class Quiz extends Component {
         <Answers
           isAnswered={this.state.isAnswered}
           question={this.state.question}
+          score={this.state.score}
           nextQuestion={this.nextQuestion}
           isCorrect={this.state.isCorrect}
           checkAnswer={this.checkAnswer}

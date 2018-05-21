@@ -15,9 +15,12 @@ class Answers extends Component {
       );
     } else {
       return (
-        <Link className="quizmaniaBtn feedbackBtn" to="/">
-          Next
-        </Link>
+        <div className="endContainer">
+          <p>Quiz coompleted! {this.props.score}/10</p>
+          <Link className="quizmaniaBtn nextBtn" to="/">
+            Next
+          </Link>
+        </div>
       );
     }
   }
