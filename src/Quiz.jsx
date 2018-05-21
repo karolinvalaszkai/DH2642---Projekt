@@ -21,6 +21,22 @@ class Quiz extends Component {
     this.nextQuestion = this.nextQuestion.bind(this);
   }
 
+  componentDidUpdate() {
+    if (this.state.question > 8) {
+      console.log(this.state.score);
+      firestore
+        .collection('scores')
+        .add({
+          score: this.state.score,
+          user: this.state.userId,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+  }
+
   checkAnswer(answer) {
     if (!this.state.isAnswered) {
       if (answer === data[this.state.question].correct) {
@@ -28,26 +44,14 @@ class Quiz extends Component {
           score: this.state.score + 1,
           isCorrect: true,
           isAnswered: true,
-          zoom: 3
+          zoom: 4
         });
       } else {
         this.setState({
           isCorrect: false,
           isAnswered: true,
-          zoom: 3
+          zoom: 4
         });
-      }
-      if (this.state.question > 8) {
-        firestore
-          .collection('scores')
-          .add({
-            score: this.state.score,
-            user: this.state.userId,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          })
-          .catch(error => {
-            console.log(error);
-          });
       }
     }
   }
@@ -75,6 +79,7 @@ class Quiz extends Component {
         />
         <Map
           zoom={this.state.zoom}
+          marker={this.state.isAnswered}
           google={this.props.google}
           center={data[this.state.question].coordinates}
         />

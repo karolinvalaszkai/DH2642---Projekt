@@ -42,11 +42,18 @@ class Map extends Component {
           rotateControl: false,
           fullscreenControl: false,
           gestureHandling: 'none',
-          mapTypeId: 'hybrid'
+          mapTypeId: 'satellite'
         }
       );
 
-      this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+      this.map = new maps.Map(node, mapConfig);
+
+      if (this.props.marker) {
+        const marker = new google.maps.Marker({
+          position: this.props.center, // sets position of marker to specified location
+          map: this.map
+        });
+      }
     }
   }
 
