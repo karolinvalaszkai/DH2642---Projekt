@@ -17,6 +17,7 @@ constructor(props) {
             score: 0,
             displayPopup: 'flex'
         }
+        this.zoomRate = 17;
         this.nextQuestion = this.nextQuestion.bind(this);
         this.handleShowButton = this.handleShowButton.bind(this);
         this.handleStartQuiz = this.handleStartQuiz.bind(this);
@@ -38,6 +39,7 @@ constructor(props) {
     }
 
     nextQuestion() {
+        this.zoomRate = 17;
         let { nr, total, score } = this.state;
 
         if(nr === total){
@@ -55,6 +57,7 @@ constructor(props) {
     }
 
     handleShowButton() {
+      this.zoomRate = 3;
         this.setState({
             showButton: true,
             questionAnswered: true
@@ -94,7 +97,7 @@ constructor(props) {
                         </div>
                     </div>
                 </div>
-              <MapContainer google={this.props.google} />
+              <MapContainer google={this.props.google} zoomRate={this.zoomRate} currentCountry={data[this.state.nr-1].answers[data[this.state.nr-1].correct-1]}/>
             </div>
         );
     }

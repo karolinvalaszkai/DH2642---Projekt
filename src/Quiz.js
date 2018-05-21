@@ -12,6 +12,7 @@ class Quiz extends Component {
     return (
       <div>
         <QuizContainer/>
+        <MapContainer google={this.props.google} zoomRate={23}/>
       </div>
     );
   }

@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-//import * as Ons from 'react-onsenui';
 
 export default class MapContainer extends Component {
 
-  // state = {
-  //   locations: [
-  //     { name: "New York County Supreme Court", location: {lat: 40.7143033, lng: -74.0036919} },
-  //     { name: "Queens County Supreme Court", location: {lat: 40.7046946, lng: -73.8091145} },
-  //     { name: "Kings County Supreme Court", location: {lat: 40.6940226, lng: -73.9890967} },
-  //     { name: "Richmond County Supreme Court", location: {lat: 40.6412336, lng: -74.0768597} },
-  //     { name: "Bronx Supreme Court", location: {lat: 40.8262388, lng: -73.9235238} }
-  //   ]
-  // }
 
 
   componentDidUpdate() {
-    this. zoomRate = 17;
+
+    console.log("Zoom: ",this.props.zoomRate);
+    console.log("MapContainer currentCountry: ", this.props.currentCountry);
 
     this.countries = [
                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
@@ -32,45 +24,12 @@ export default class MapContainer extends Component {
 
                 ];
 
-    console.log("componentDidUpdate", this.countryNumber)
-  console.log("componentDidUpdate countries", this.countries)
-
-  if (this.countryNumber === undefined) {
-    this.countryNumber = 0;
-  }
-
-  if (this.countryNumber === 10) {
-    console.log("KLAAAART")
-  }
-
-  if (this.state.isToggleOn === true) {
-    this.zoomRate = 17;
-    this.countryNumber = this.countryNumber + 1;
-  };
-  if (this.state.isToggleOn === false) {
-    this.zoomRate = 3
-
-  };
   this.loadMap(); // call loadMap function to load the google map
 
 
   }
 
   loadMap() {
-
-
-    // var countries = [
-    //                 {country: "France", coordinates: {lat: 48.858289, lng: 2.294261}},
-    //                 {country: "Sweden", coordinates: {lat: 59.3498092, lng: 18.0684758}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "Italy", coordinates: {lat: 41.890000, lng: 12.491944}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}},
-    //                 {country: "U.S.A.", coordinates: {lat: 40.689806, lng: -74.044483}}
-    //                 ];
 
     if (this.props && this.props.google) { // checks to make sure that props have been passed
 
@@ -84,11 +43,7 @@ export default class MapContainer extends Component {
 
       const mapConfig = Object.assign({}, {
         center: this.countries[this.countryNumber - 1].coordinates, // sets center of google map to NYC.
-        //zoom: this.zoomRate, // sets zoom. Lower numbers are zoomed further out.
-        // zoom: function zoom(map, _zoom) {
-        //     map.setZoom(_zoom);
-        //   },
-        zoom: this.zoomRate,
+        zoom: this.props.zoomRate,
 
       //Disable all google maps functions
       streetViewControl: false,
@@ -171,16 +126,9 @@ export default class MapContainer extends Component {
       <button onClick = {this.showHideAnswer}>
       {
         this.state.isToggleOn ? 'Show answer' : 'Hide answer'
-      } <
-      /button>
+      } 
+      </button>
 
-      {
-        /*
-              // <Ons.Page>
-              //   <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
-              // </Ons.Page>
-              */
-      }
       <div ref = "map" style = {style} >
       loading map...
       </div>
