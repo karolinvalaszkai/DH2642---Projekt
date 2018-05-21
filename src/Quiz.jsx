@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { GoogleApiWrapper } from 'google-maps-react';
+import Map from './Map';
 import { firebase, firestore } from './firebase';
 import Answers from './Answers';
 import data from './data';
 import './styles/Quiz.css';
-
-const mapStyle = {
-  width: '100vw',
-  height: '100vh',
-  zIndex: '-10',
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  margin: '0',
-  padding: '0'
-};
 
 class Quiz extends Component {
   constructor(props) {
@@ -25,7 +15,7 @@ class Quiz extends Component {
       score: 0,
       isCorrect: false,
       isAnswered: false,
-      zoom: 14
+      zoom: 17
     };
     this.checkAnswer = this.checkAnswer.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
@@ -38,13 +28,13 @@ class Quiz extends Component {
           score: this.state.score + 1,
           isCorrect: true,
           isAnswered: true,
-          zoom: 8
+          zoom: 3
         });
       } else {
         this.setState({
           isCorrect: false,
           isAnswered: true,
-          zoom: 6
+          zoom: 3
         });
       }
       if (this.state.question > 8) {
@@ -86,7 +76,6 @@ class Quiz extends Component {
         <Map
           zoom={this.state.zoom}
           google={this.props.google}
-          style={mapStyle}
           center={data[this.state.question].coordinates}
         />
       </div>
