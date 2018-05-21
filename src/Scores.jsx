@@ -31,7 +31,9 @@ class Scores extends Component {
       .orderBy('score', 'desc')
       .limit(1)
       .onSnapshot(snap => {
-        this.setState({ userScore: snap.docs[0].data().score });
+        snap.forEach(doc => {
+          this.setState({ userScore: doc.data().score });
+        });
       });
 
     this.unregisterScoresObserver = firestore
@@ -58,7 +60,7 @@ class Scores extends Component {
     const highscores = this.state.scores.map(score => {
       return (
         <tr key={uuid()}>
-          <td className="firstCol">{this.state.users[score.user].name}</td>
+          <td className="firstCol">{this.state.users[score.user] ? this.state.users[score.user].name : 'no name'}</td>
           <td className="secondCol">{score.score}</td>
         </tr>
       );

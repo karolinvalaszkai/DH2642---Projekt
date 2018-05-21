@@ -21,19 +21,18 @@ class Quiz extends Component {
     this.nextQuestion = this.nextQuestion.bind(this);
   }
 
-  componentDidUpdate() {
-    if (this.state.question > 8) {
-      firestore
-        .collection('scores')
-        .add({
-          score: this.state.score,
-          user: this.state.userId,
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+  componentWillUnmount() {
+    console.log(this.state.score);
+    firestore
+      .collection('scores')
+      .add({
+        score: this.state.score,
+        user: this.state.userId,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   checkAnswer(answer) {

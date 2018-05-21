@@ -16,7 +16,7 @@ class Answers extends Component {
     } else {
       return (
         <div className="endContainer">
-          <p>Quiz coompleted! {this.props.score}/10</p>
+          <p>Quiz completed! {this.props.score}/10</p>
           <Link className="quizmaniaBtn nextBtn" to="/">
             Next
           </Link>
