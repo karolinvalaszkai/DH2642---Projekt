@@ -49,7 +49,7 @@ class Map extends Component {
       this.map = new maps.Map(node, mapConfig);
 
       if (this.props.marker) {
-        const marker = new google.maps.Marker({
+        this.marker = new google.maps.Marker({
           position: this.props.center, // sets position of marker to specified location
           map: this.map
         });
