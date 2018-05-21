@@ -51,6 +51,14 @@
   text-decoration: none;
   background-color: white;
   width: 34vw;
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+}
+button:active {
+  border: none;
 }
 
 .feedbackContainer {
