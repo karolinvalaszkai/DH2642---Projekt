@@ -69,7 +69,9 @@ class Scores extends Component {
           <div className="scoresTitle">
             <h1>Quizmania</h1>
             <h3 className="scoreName">
-              {this.state.user ? this.state.users[this.userId].name : ''}
+              {this.state.users[this.userId]
+                ? this.state.users[this.userId].name
+                : ''}
             </h3>
           </div>
         </div>
